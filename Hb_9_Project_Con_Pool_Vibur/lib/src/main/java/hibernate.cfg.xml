@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:mysql://localhost:3306/mydb</property>
+        <property name="connection.username">root</property>
+        <property name="connection.password">login1-2</property>
+        <!-- Set the hbm2ddl.auto property to "update" to create or update the table -->
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+<!--         <property name="hibernate.connection.provider_class">org.hibernate.vibur.internal.ViburDBCPConnectionProvider</property> -->
+        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
+ <!-- Configure c3p0 connection pool -->
+    <property name="hibernate.c3p0.min_size">5</property>  <!-- Minimum number of connections -->
+    <property name="hibernate.c3p0.max_size">20</property> <!-- Maximum number of connections -->
+    <property name="hibernate.c3p0.timeout">300</property>  <!-- Timeout for acquiring connections -->
+    <property name="hibernate.c3p0.max_statements">50</property> <!-- Maximum prepared statements -->
+    <property name="hibernate.c3p0.idle_test_period">3000</property> <!-- Period for testing idle connections -->
+    <property name="hibernate.c3p0.acquire_increment">3</property> <!-- Number of connections acquired when pool is exhausted -->
+    <property name="hibernate.c3p0.validate">true</property> <!-- Validate connections before using -->
+    <property name="hibernate.c3p0.preferredTestQuery">SELECT 1;</property> <!-- Query used for testing connections -->
+        
+<!--         Vibur Connection Pool Settings -->
+<!--         <property name="hibernate.vibur.pool.maxConnections">20</property> -->
+<!--         <property name="hibernate.vibur.pool.minIdle">5</property> -->
+<!--         <property name="hibernate.vibur.pool.acquireIncrement">3</property> -->
+<!--         <property name="hibernate.vibur.pool.acquireRetryAttempts">3</property> -->
+<!--         <property name="hibernate.vibur.pool.acquireRetryDelay">1000</property> -->
+
+<!--         Connection Validation -->
+<!--         <property name="hibernate.vibur.validation.enabled">true</property> -->
+<!--         <property name="hibernate.vibur.validation.query">SELECT 1</property> -->
+
+<!--         Statement Handling -->
+<!--         <property name="hibernate.vibur.useStatementFacade">true</property> -->
+
+<!--         Logging and Debugging -->
+<!--         <property name="hibernate.vibur.logQueryExecutionLongerThanMs">1000</property> -->
+        <!-- Other Hibernate Properties -->
+        <!-- Add more Hibernate properties as needed -->
+
+        <!-- Mapping file for your entity -->
+        <mapping resource="com/nt/entity/Bank.hbm.xml"/>
+
+    </session-factory>
+</hibernate-configuration>
