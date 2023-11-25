@@ -1,0 +1,33 @@
+plugins {
+    id 'war'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Javax Persistence API
+    implementation group: 'javax.persistence', name: 'javax.persistence-api', version: '2.2'
+
+    // Hibernate ORM
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '5.6.15.Final'
+    implementation group: 'org.hibernate', name: 'hibernate-hikaricp', version: '5.6.15.Final'
+
+    // MySQL Connector
+    implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.27'
+
+    // HikariCP Connection Pooling
+    implementation group: 'com.zaxxer', name: 'HikariCP', version: '4.1.0'
+
+    // Servlet API
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+
+    // Other dependencies you may need
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.slf4j:slf4j-api:1.7.32'
+    implementation 'org.slf4j:slf4j-log4j12:1.7.32'
+}
+
+// Other configurations for your web application, like sourceSets, tasks, etc.
+
