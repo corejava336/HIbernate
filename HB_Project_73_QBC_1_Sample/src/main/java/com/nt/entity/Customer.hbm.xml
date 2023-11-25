@@ -1,0 +1,12 @@
+<!DOCTYPE hibernate-mapping SYSTEM "file:///D:/JAVA/HIBERNATE/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.nt.entity.Customer" table="customer">
+		<id name="id">
+			<generator class="increment"></generator>
+		</id>
+		<property name="Age"></property>
+		<property name="name"></property>
+		<property name="Company_name"></property>
+		<property name="Address"></property>
+	</class>
+</hibernate-mapping>
