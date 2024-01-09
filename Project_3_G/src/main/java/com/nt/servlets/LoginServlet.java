@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.resource.transaction.spi.TransactionStatus;
 
 import com.nt.entity.bank;
+import com.nt.entity.items;
 import com.nt.service.BankService;
 import com.nt.util.util;
 
@@ -16,6 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -23,16 +25,28 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
-        BankService bankService = new BankService();
         HttpSession session = request.getSession();
+
+        // Retrieve or create BankService instance
+        BankService bankService = (BankService) session.getAttribute("BankService");
+        if (bankService == null) {
+            bankService = new BankService();
+            session.setAttribute("BankService", bankService);
+        }
+
+        // Retrieve or create items instance in session
+        items i = (items) session.getAttribute("items");
+        if (i == null) {
+            i = new items();
+            session.setAttribute("items", i);
+        }
+
         bank BankEntity = new bank();
         Session ses = null;
 
         try {
             ses = util.getSession();
             ses.beginTransaction();
-
-            session.setAttribute("BankService", bankService);
             session.setAttribute("BankEntity", BankEntity);
             boolean loginSuccess = bankService.login(request.getParameter("name"), request.getParameter("password"));
 
@@ -59,32 +73,11 @@ public class LoginServlet extends HttpServlet {
                 ses.getTransaction().rollback();
             }
         } finally {
-            // Close the session in the finally block to ensure it's closed even if an exception occurs
+            // Close the session in the finally block to ensure it's closed even if an
+            // exception occurs
             if (ses != null && ses.isOpen()) {
                 ses.close();
             }
         }
     }
 }
-
-
-
-/*
- * @WebServlet("/LoginServlet") public class LoginServlet extends HttpServlet {
- * private static final long serialVersionUID = 1L;
- * 
- * protected void doPost(HttpServletRequest request, HttpServletResponse
- * response) throws ServletException, IOException { PrintWriter out =
- * response.getWriter(); String name = request.getParameter("name"); String
- * password = request.getParameter("password"); HttpSession session =
- * request.getSession(); BankService bankService = new BankService();
- * session.setAttribute("BankService", bankService); bank BankEntity = new
- * bank(); // Assuming bank is your entity class
- * session.setAttribute("BankEntity", BankEntity); boolean loginSuccess =
- * bankService.login(name, password);
- * 
- * if (loginSuccess) {
- * request.getRequestDispatcher("/welcome.jsp").forward(request, response); }
- * else { out.println("Record not found"); response.sendRedirect("signup.jsp");
- * } } }
- */

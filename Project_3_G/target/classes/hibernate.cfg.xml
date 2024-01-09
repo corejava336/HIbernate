@@ -20,6 +20,7 @@
 		<!-- Correct the mapping resource path -->
 
 		<mapping resource="com/nt/entity/bank.hbm.xml" />
+		<mapping resource="com/nt/entity/items.hbm.xml" />
 
 	</session-factory>
 </hibernate-configuration>

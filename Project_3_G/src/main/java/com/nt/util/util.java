@@ -37,7 +37,6 @@ public class util {
         return ses;
     }
 
-
     public static SessionFactory getSessionFactory() {
         if (sf != null) {
             return sf;
@@ -53,7 +52,7 @@ public class util {
     }
 
     public static Transaction beginTransaction(Session session) {
-        if (session != null) {
+        if (session != null && !session.getTransaction().isActive()) {
             return session.beginTransaction();
         }
         return null;
