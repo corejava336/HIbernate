@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "file:///D:/JAVA/HIBERNATE/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.nt.entity.GMS" table="GMS">
+        <id name="aid">
+            <generator class="increment"></generator>
+        </id>
+        <timestamp name="LastUpdated"></timestamp>
+        <property name="name"></property>
+        <property name="type"></property>
+        <property name="DateOfOpen"></property>
+    </class>
+</hibernate-mapping>
